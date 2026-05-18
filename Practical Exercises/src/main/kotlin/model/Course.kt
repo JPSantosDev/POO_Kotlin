@@ -22,6 +22,9 @@ class Course(
     fun orderCourse(): List<Course>{
        return courses.sortedBy { it.title }
     }
+    fun levelCourse(): List<Course>{
+        return courses.filter { it.level == level }
+    }
 
 
     init {
