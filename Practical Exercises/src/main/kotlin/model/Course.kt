@@ -3,7 +3,7 @@ package org.example.model
 class Course(
     val id:Int,
     val title:String,
-    val woarkloadHours:Int,
+    val workloadHours:Int,
     val level: CourseLevel
 ){
     private val courses = mutableListOf<Course>()
@@ -25,7 +25,9 @@ class Course(
     fun levelCourse(): List<Course>{
         return courses.filter { it.level == level }
     }
-
+    fun totalWorkload():Int{
+        return courses.sumOf { it.workloadHours }
+    }
 
     init {
         require (id>0){
@@ -34,7 +36,7 @@ class Course(
         require (title!=null){
             "CURSO DEVE HAVER UM TÍTULO VÁLIDO"
         }
-        require(woarkloadHours>0){
+        require(workloadHours>0){
             "A CARGA HORÁRIA DEVE SER MAIOR QUE 0"
         }
     }
