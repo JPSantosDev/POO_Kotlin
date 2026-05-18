@@ -7,11 +7,14 @@ data class Course(
     val level: CourseLevel
 ){
 
+    fun summary(id: Int,title: String,woarkloadHours: Int,level: CourseLevel): String {
+        return "O curso de $title com id $id tem $woarkloadHours horas de carga horária, com um nível $level"
+    }
+
     init {
         require (id>0){
             "ID DEVE SER POSITIVO"
         }
-
         require (title!=null){
             "CURSO DEVE HAVER UM TÍTULO VÁLIDO"
         }
