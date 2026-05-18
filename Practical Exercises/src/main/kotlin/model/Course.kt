@@ -11,11 +11,18 @@ class Course(
     fun summary(id: Int,title: String,woarkloadHours: Int,level: CourseLevel): String {
         return "O curso de $title com id $id tem $woarkloadHours horas de carga horária, com um nível $level"
     }
-    fun addCourse(curso: Course):Boolean{
-        if(courses.any{it.id == curso.id}) return false
-        courses.add(curso)
+    fun addCourse(course: Course):Boolean{
+        if(courses.any{it.id == course.id}) return false
+        courses.add(course)
         return true
     }
+    fun searchCourse(course:Course):Course?{
+        return courses.find{it.id == course.id}
+    }
+    fun orderCourse(): List<Course>{
+       return courses.sortedBy { it.title }
+    }
+
 
     init {
         require (id>0){
