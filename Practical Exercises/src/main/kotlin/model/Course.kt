@@ -13,7 +13,7 @@ data class Course(
         }
 
         require (title!=null){
-            "CURSO DEVE HAVER UM TÍTULO"
+            "CURSO DEVE HAVER UM TÍTULO VÁLIDO"
         }
         require(woarkloadHours>0){
             "A CARGA HORÁRIA DEVE SER MAIOR QUE 0"
