@@ -8,8 +8,8 @@ data class Trail(
     private val courseList = mutableListOf<Course>()
 
     init {
-        require(id>0) { "id da trilha deve ser positivo" }
-        require (name.isNotBlank()) { "trilha deve haver um nome" }
+        require(id > 0) { "id da trilha deve ser positivo" }
+        require(name.isNotBlank()) { "trilha deve haver um nome" }
     }
 
     fun addCourseToTrail(course: Course, status: TrailStatus): Boolean {
@@ -32,4 +32,5 @@ data class Trail(
     }
 
     fun listCourses(): List<Course> = courseList.toList()
+
 }

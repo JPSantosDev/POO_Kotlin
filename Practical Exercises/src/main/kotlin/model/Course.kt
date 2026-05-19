@@ -4,7 +4,8 @@ class Course(
     val id:Int,
     val title:String,
     val workloadHours:Int,
-    val level: CourseLevel
+    val level: CourseLevel,
+    val status: TrailStatus
 ){
     private val courses = mutableListOf<Course>()
 
@@ -43,5 +44,7 @@ class Course(
     fun removeCourse(course: Course): Boolean{
         return courses.remove(course)
     }
+    fun totalCourses(): Int = courses.size
 
+    fun completedCourses(): List<Course> = courses.filter { it.status == TrailStatus.COMPLETED }
 }
