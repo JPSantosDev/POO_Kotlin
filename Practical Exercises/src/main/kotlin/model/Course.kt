@@ -5,7 +5,6 @@ class Course(
     val title:String,
     val workloadHours:Int,
     val level: CourseLevel,
-    val status: TrailStatus
 ) {
     private val courses = mutableListOf<Course>()
 
