@@ -8,18 +8,20 @@ data class Trail(
 private val courseList = mutableListOf<Course>()
 
 fun addCourseToTrail(course: Course,status: TrailStatus):Boolean{
-    if(status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
+    if(status != TrailStatus.OPEN)
+        return false
+    if(courseList.any{it.id == course.id})
         return false
     courseList.add(course)
     return true
 }
 
 fun removeCourseFromTrail(id:Int, status: TrailStatus):Boolean{
-    if(status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
+    if(status != TrailStatus.OPEN)
         return false
-    courseList.removeIf { it.id == id }
-    return true
+    return courseList.removeIf { it.id == id }
 }
 fun totalTrailWorkload(): Int{
     return courseList.sumOf { it.workloadHours }
 }
+fun listCourses(): List<Course> = courseList.toList()

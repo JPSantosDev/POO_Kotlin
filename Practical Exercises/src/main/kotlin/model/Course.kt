@@ -9,7 +9,7 @@ class Course(
     private val courses = mutableListOf<Course>()
 
     fun summary(id: Int,title: String,woarkloadHours: Int,level: CourseLevel): String {
-        return "O curso de $title com id $id tem $woarkloadHours horas de carga horária, com um nível $level"
+        return "O curso de $title com id $id tem $woarkloadHours horas de carga horária, com um nível ${level}"
     }
     fun addCourse(course: Course):Boolean{
         if(courses.any{it.id == course.id}) return false
