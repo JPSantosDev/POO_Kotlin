@@ -28,6 +28,9 @@ class Course(
     fun totalWorkload():Int{
         return courses.sumOf { it.workloadHours }
     }
+    fun removeCourse(course: Course): Boolean{
+        return courses.remove(course)
+    }
 
     init {
         require (id>0){
