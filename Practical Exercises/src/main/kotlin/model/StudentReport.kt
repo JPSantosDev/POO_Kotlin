@@ -18,17 +18,17 @@ class StudentReport (
     }
     fun classification(): String{
        return when(percent()){
-           0 -> "Sem prograsso"
+           0 -> "Sem progresso"
            in 1..79 -> "Em andamento"
            in 80..99 -> "Quase concluido"
            else -> "Concluido"
        }
     }
-
-    fun ranking(): List<Pair<String, Int>> {
-    val lista = mutableListOf<Pair<String,Int>>()
-        lista.add(Pair(student.name,percent()))
-        return lista.sortedWith(compareByDescending<Pair<String, Int>> { it.second } .thenBy { it.first })
+    fun ranking(): List<StudentReport> {
+    val lista = mutableListOf<StudentReport>()
+        return lista.sortedWith(
+            compareByDescending<StudentReport> { it.percent() }
+                .thenBy { it.student.name })
 
     }
 }
