@@ -1,9 +1,10 @@
 package org.example.model
 
-data class Trail(
+class Trail(
     val id:Int,
     val name: String,
     val status: TrailStatus,
+    val description: String,
 ) {
     private val courseList = mutableListOf<Course>()
 
@@ -13,7 +14,7 @@ data class Trail(
     }
 
     fun addCourseToTrail(course: Course, status: TrailStatus): Boolean {
-        if (status != TrailStatus.OPEN)
+        if (status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
             return false
         if (courseList.any { it.id == course.id })
             return false
@@ -22,7 +23,7 @@ data class Trail(
     }
 
     fun removeCourseFromTrail(id: Int, status: TrailStatus): Boolean {
-        if (status != TrailStatus.OPEN)
+        if (status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
             return false
         return courseList.removeIf { it.id == id }
     }
@@ -32,5 +33,6 @@ data class Trail(
     }
 
     fun listCourses(): List<Course> = courseList.toList()
+    fun courseCount(): Int = courseList.size
 
 }

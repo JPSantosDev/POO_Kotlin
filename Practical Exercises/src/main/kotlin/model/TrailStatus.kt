@@ -1,7 +1,8 @@
 package org.example.model
 
 enum class TrailStatus {
-    OPEN,
+    PLANNED,
+    ACTIVE,
     COMPLETED,
     ARCHIVED
 }
