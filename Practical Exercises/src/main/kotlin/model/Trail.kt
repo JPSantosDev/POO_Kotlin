@@ -13,7 +13,7 @@ class Trail(
         require(name.isNotBlank()) { "trilha deve haver um nome" }
     }
 
-    fun addCourseToTrail(course: Course, status: TrailStatus): Boolean {
+    fun addCourseToTrail( course: Course ): Boolean {
         if (status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
             return false
         if (courseList.any { it.id == course.id })
@@ -22,7 +22,7 @@ class Trail(
         return true
     }
 
-    fun removeCourseFromTrail(id: Int, status: TrailStatus): Boolean {
+    fun removeCourseFromTrail(id: Int ): Boolean {
         if (status == TrailStatus.ARCHIVED || status == TrailStatus.COMPLETED)
             return false
         return courseList.removeIf { it.id == id }
