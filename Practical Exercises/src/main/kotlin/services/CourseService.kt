@@ -3,9 +3,7 @@ package org.example.services
 import org.example.model.Course
 import org.example.model.CourseLevel
 
-class CourseService(
-    val level: CourseLevel,
-) {
+class CourseService() {
     private val courses = mutableListOf<Course>()
 
     fun addCourse(course: Course): Boolean {
@@ -14,15 +12,15 @@ class CourseService(
         return true
     }
 
-    fun searchCourse(course: Course): Course? {
-        return courses.find { it.id == course.id }
+    fun searchCourse(id:Int): Course? {
+        return courses.find { it.id == id }
     }
 
     fun orderCourse(): List<Course> {
         return courses.sortedBy { it.title }
     }
 
-    fun levelCourse(): List<Course> {
+    fun levelCourse(level: CourseLevel): List<Course> {
         return courses.filter { it.level == level }
     }
 
@@ -30,7 +28,7 @@ class CourseService(
         return courses.sumOf { it.workloadHours }
     }
 
-    fun removeCourse(course: Course): Boolean {
-        return courses.remove(course)
+    fun removeCourse(id: Int): Boolean {
+        return courses.removeIf{ it.id == id }
     }
 }

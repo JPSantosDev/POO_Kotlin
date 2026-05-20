@@ -11,7 +11,7 @@ class Course(
         require(id > 0) {
             "ID DEVE SER POSITIVO"
         }
-        require(title != null) {
+        require(title.isNotBlank()) {
             "CURSO DEVE HAVER UM TÍTULO VÁLIDO"
         }
         require(workloadHours > 0) {
