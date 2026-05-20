@@ -1,5 +1,7 @@
 package org.example.model
 
+import org.example.enums.CourseLevel
+
 class Course(
     val id:Int,
     val title:String,

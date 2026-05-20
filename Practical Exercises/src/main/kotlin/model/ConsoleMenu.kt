@@ -1,5 +1,7 @@
 package org.example.model
 
+import org.example.enums.CourseLevel
+
 class ConsoleMenu(
     val course: Course,
     val trail: Trail,

@@ -12,15 +12,15 @@ class StudentReport (
         require(completedCourses >= 0) { "Cursos completados deve ser um valor positivo" }
         require(totalCourses > 0) { "Cursos totais deve ser maior que 0" }
     }
-    fun percent():Int{
-        if(totalCourses == 0) return 0
-        return (completedCourses*100)/totalCourses
+    fun percent():Double{
+        if(totalCourses == 0) return 0.0
+        return (completedCourses*100.0)/totalCourses
     }
     fun classification(): String{
        return when(percent()){
-           0 -> "Sem progresso"
-           in 1..79 -> "Em andamento"
-           in 80..99 -> "Quase concluido"
+           0.0 -> "Sem progresso"
+           in 1.0..79.0 -> "Em andamento"
+           in 80.0..99.9 -> "Quase concluido"
            else -> "Concluido"
        }
     }

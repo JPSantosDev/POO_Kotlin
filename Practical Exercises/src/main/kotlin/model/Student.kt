@@ -1,5 +1,7 @@
 package org.example.model
 
+import org.example.enums.StudentStatus
+
 class Student(
     val id: Int,
     val name: String,

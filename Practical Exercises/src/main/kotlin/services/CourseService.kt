@@ -1,7 +1,7 @@
 package org.example.services
 
 import org.example.model.Course
-import org.example.model.CourseLevel
+import org.example.enums.CourseLevel
 
 class CourseService() {
     private val courses = mutableListOf<Course>()

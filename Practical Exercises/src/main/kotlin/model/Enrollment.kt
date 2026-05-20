@@ -1,17 +1,21 @@
 package org.example.model
 
+import org.example.enums.EnrollmentStatus
+
 class Enrollment (
     val student: Student,
     val trail: Trail,
-    status: EnrollmentStatus = EnrollmentStatus.ACTIVE
-){
-    var status: EnrollmentStatus = status
+) {
+    init {
+
+    }
+    var status: EnrollmentStatus = EnrollmentStatus.ACTIVE
+        private set
+    var completedCourses:Int = 0
         private set
 
-    fun finish():Boolean{
-        if(status == EnrollmentStatus.CANCELLED)
-            return false
-        status = EnrollmentStatus.FINISHED
-        return true
+    fun percent(completedCourses:Int,totalCourses:Int):Double{
+        val report = StudentReport(student,trail.name,completedCourses,totalCourses,)
+        return report.percent()
     }
 }

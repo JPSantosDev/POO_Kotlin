@@ -2,7 +2,7 @@ package org.example.services
 
 import org.example.model.Course
 import org.example.model.Trail
-import org.example.model.TrailStatus
+import org.example.enums.TrailStatus
 
 class TrailService {
 
@@ -22,10 +22,9 @@ class TrailService {
 
     fun listTrails(): List<Trail> = trailList.toList()
 
-    fun addCourseToTrail( trailid:Int ,course: Course ): Boolean {
-    val trail = findTrail(trailid) ?: return false
+    fun addCourseToTrail( trailId:Int ,course: Course ): Boolean {
+    val trail = findTrail(trailId) ?: return false
         return trail.addCourseToTrail(course)
     }
-
 }
 

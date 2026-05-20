@@ -1,5 +1,7 @@
 package org.example.model
 
+import org.example.enums.TrailStatus
+
 class Trail(
     val id:Int,
     val name: String,
@@ -34,5 +36,4 @@ class Trail(
 
     fun listCourses(): List<Course> = courseList.toList()
     fun courseCount(): Int = courseList.size
-
 }

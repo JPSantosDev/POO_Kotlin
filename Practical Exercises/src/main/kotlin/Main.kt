@@ -1,5 +1,7 @@
 package org.example
 
-fun main(){
+import org.example.model.principalMenu
 
+fun main(){
+    principalMenu()
 }
