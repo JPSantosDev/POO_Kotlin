@@ -1,6 +1,7 @@
 package org.example.model
 
 import org.example.enums.CourseLevel
+import org.example.enums.TrailStatus
 import org.example.services.CourseService
 import org.example.services.EnrollmentService
 import org.example.services.StudentService
@@ -34,7 +35,7 @@ class Console (
                     else cursos.forEach { println("ID: ${it.id} | Título: ${it.title} | Carga: ${it.workloadHours}h | Nível: ${it.level}") }
                 }
 
-                "5" -> {cadastrarAluno()}
+                "5" -> {cadastrarTrilha()}
 
                 "6" -> {
                     val trilhas = trailService.listTrails()
@@ -117,6 +118,36 @@ class Console (
             val curso = Course(id, titulo, carga, nivel)
             if (courseService.addCourse(curso))
                 println("Curso cadastrado com sucesso.")
+            else
+                println("ID já cadastrado.")
+        } catch (e: Exception) {
+            println("Erro: ${e.message}")
+        }
+    }
+    private fun cadastrarTrilha() {
+        print("ID: ")
+        val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+
+        print("Nome: ")
+        val nome = readlnOrNull()?.trim() ?: return
+
+        print("Descrição: ")
+        val descricao = readlnOrNull()?.trim() ?: return
+
+        println("Status (PLANNED, ACTIVE, COMPLETED, ARCHIVED): ")
+        val statusStr = readlnOrNull()?.trim()?.uppercase() ?: return
+
+        val status = try {
+            TrailStatus.valueOf(statusStr)
+        } catch (e: IllegalArgumentException) {
+            println("Status inválido.")
+            return
+        }
+
+        try {
+            val trilha = Trail(id, nome, status, descricao)
+            if (trailService.addTrail(trilha))
+                println("Trilha cadastrada com sucesso.")
             else
                 println("ID já cadastrado.")
         } catch (e: Exception) {
