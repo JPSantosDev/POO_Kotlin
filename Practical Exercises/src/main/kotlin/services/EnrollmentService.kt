@@ -28,15 +28,14 @@ class EnrollmentService {
         return matriculas.toList()
     }
     fun listByTrail(trailId:Int):List<Enrollment> {
-        return matriculas.filter { it.trail.id == trailId}
+        return matriculas.filter { it.trail.id == trailId }
     }
     fun progressRanking(): List<Enrollment> {
         return matriculas.sortedWith(compareByDescending<Enrollment> {it.percent() } .thenBy { it.student.name })
 
     }
     fun studentsWithoutEnrollments(allStudents:List<Student>):List<Student> {
-        return allStudents.filter { aluno->
-            matriculas.none{it.student.id == aluno.id}
-        }roll
+        return allStudents.filter { aluno-> matriculas.none{it.student.id == aluno.id }
+        }
     }
 }

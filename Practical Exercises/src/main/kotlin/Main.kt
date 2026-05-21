@@ -12,5 +12,5 @@ fun main(){
     val enrollmentService = EnrollmentService()
     val courseService = CourseService()
 
-    Console(courseService,enrollmentService,studentService,trailService)
+    Console(courseService,enrollmentService,studentService,trailService).run()
 }

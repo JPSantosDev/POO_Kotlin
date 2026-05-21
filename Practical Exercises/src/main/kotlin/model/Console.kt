@@ -18,6 +18,17 @@ class Console (
             printMenu()
             when(readLine()?.trim()){
                 "1" -> {cadastrarAluno()}
+                "2" -> {cadastrarAluno()}
+                "3" -> {cadastrarAluno()}
+                "4" -> {cadastrarAluno()}
+                "5" -> {cadastrarAluno()}
+                "6" -> {cadastrarAluno()}
+                "7" -> {cadastrarAluno()}
+                "8" -> {cadastrarAluno()}
+                "9" -> {cadastrarAluno()}
+                "10" -> {cadastrarAluno()}
+                "11" -> {cadastrarAluno()}
+                else -> {println("Opção Inválida")}
             }
         }
     }
@@ -41,27 +52,25 @@ class Console (
         print("ID:")
         val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run {
             println("ID Inválido")
-        return
+            return
         }
+
         print("Nome: ")
         val nome = readlnOrNull()?.trim() ?: run {
             println("Nome Inválido")
-        return
+            return
         }
+
         print("E-mail: ")
         val email = readlnOrNull()?.trim() ?: run {
             println("E-mail inválido")
             return
         }
-try {
 
-    if (studentService.createStudent(id, nome, email)) {
-        println("Aluno cadastrado com sucesso")
-    } else{
-        println("ID já cadastrado")
-    }
-} catch (e: Exception) {
-    println("Error: $e")
-}
+        if (studentService.createStudent(id, nome, email)) {
+            println("Aluno cadastrado com sucesso")
+        } else{
+            println("ID já cadastrado")
+        }
     }
 }
