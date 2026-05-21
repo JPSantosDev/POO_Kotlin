@@ -31,4 +31,7 @@ class CourseService() {
     fun removeCourse(id: Int): Boolean {
         return courses.removeIf{ it.id == id }
     }
+    fun listAll(): List<Course> {
+        return courses.toList()
+    }
 }
