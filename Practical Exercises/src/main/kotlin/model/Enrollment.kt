@@ -14,8 +14,9 @@ class Enrollment (
     var completedCourses:Int = 0
         private set
 
-    fun percent(completedCourses:Int,totalCourses:Int):Double{
-        val report = StudentReport(student,trail.name,completedCourses,totalCourses,)
-        return report.percent()
+    fun percent():Int{
+        val total = trail.courseCount()
+        if(total == 0) return 0
+        return ((completedCourses*100)/total)
     }
 }
