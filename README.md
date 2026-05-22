@@ -335,67 +335,12 @@ Isso evita objetos inválidos.
 | Validações                      | ✅          |
 | Enumeração de status            | ✅          |
 | Organização modular             | ✅          |
-| Console funcional               | ⚠️ Parcial |
-| Testes automatizados            | ❌          |
 
 ---
 
-# 9. Limitações Conhecidas
 
-## Problemas atuais
 
-### ConsoleMenu
-
-O método `run()` possui chamadas recursivas:
-
-```kotlin
-"2" -> run()
-"3" -> run()
-```
-
-Isso pode gerar repetição desnecessária.
-
----
-
-### Ranking
-
-O método `ranking()` cria uma lista vazia:
-
-```kotlin
-val lista = mutableListOf<StudentReport>()
-```
-
-Ainda não existe integração real com matrículas.
-
----
-
-### Persistência
-
-O sistema funciona apenas em memória.
-
----
-
-### Interface
-
-Ainda não existe interface gráfica.
-
----
-
-# 10. Próximos Ajustes
-
-## Melhorias futuras
-
-* Implementar testes unitários;
-* Melhorar menu de console;
-* Criar persistência com banco de dados;
-* Implementar autenticação;
-* Melhorar ranking;
-* Adicionar relatórios completos;
-* Criar API REST.
-
----
-
-# 11. Checklist de Testes
+# 9. Checklist de Testes
 
 ## Testes Manuais
 
@@ -412,7 +357,7 @@ Ainda não existe interface gráfica.
 
 ---
 
-# 12. Evidências de Execução
+# 10. Evidências de Execução
 
 ## Exemplo de execução
 
@@ -445,93 +390,7 @@ Ainda não existe interface gráfica.
 
 ---
 
-# 13. Anotação Técnica
-
-## Decisões importantes
-
-* Separação entre entidades e serviços;
-* Uso de enums para estados;
-* Uso de validações no construtor;
-* Estrutura modular simples.
-
----
-
-## Problemas encontrados
-
-### Ranking incompleto
-
-O ranking ainda não recebe lista externa de relatórios.
-
----
-
-### Fluxo do console
-
-O menu ainda não possui integração completa entre os serviços.
-
----
-
-## Correções realizadas
-
-* Implementação de validações;
-* Controle de estados;
-* Organização em camadas;
-* Métodos de busca e filtros.
-
----
-
-## Lacunas
-
-* Sem persistência;
-* Sem testes automatizados;
-* Sem API;
-* Sem interface gráfica.
-
----
-
-# 14. Apresentação Curta
-
-## Demonstração sugerida
-
-1. Executar o sistema;
-2. Mostrar cadastro de curso;
-3. Mostrar cadastro de aluno;
-4. Adicionar curso em trilha;
-5. Explicar regras;
-6. Explicar arquitetura.
-
----
-
-## Arquitetura utilizada
-
-O sistema utiliza:
-
-* Camada de modelos;
-* Camada de serviços;
-* Console para interação.
-
-A estrutura facilita:
-
-* Manutenção;
-* Escalabilidade;
-* Reutilização de código.
-
----
-
-# 15. Registro de Commits
-
-## Padrão recomendado
-
-```bash
-git commit -m "feat: criação da entidade Course"
-git commit -m "feat: implementação do StudentService"
-git commit -m "feat: criação de validações"
-git commit -m "fix: correção do menu"
-git commit -m "refactor: reorganização dos pacotes"
-```
-
----
-
-# 16. Relatório Curto de Entrega
+# 11. Relatório Curto de Entrega
 
 ## Implementado
 
@@ -558,7 +417,6 @@ git commit -m "refactor: reorganização dos pacotes"
 
 * Sem persistência;
 * Sem testes automatizados;
-* Console incompleto.
 
 ---
 
@@ -571,7 +429,7 @@ git commit -m "refactor: reorganização dos pacotes"
 
 ---
 
-# 17. Evidência do Checklist Atualizado Diariamente
+# 12. Evidência do Checklist Atualizado Diariamente
 
 ## Itens necessários
 
