@@ -1,28 +1,22 @@
 package org.example.model
 
+import org.example.enums.CourseCategory
 import org.example.enums.CourseLevel
 
 class Course(
-    val id:Int,
-    val title:String,
-    val workloadHours:Int,
+    val id: Int,
+    val title: String,
+    val workloadHours: Int,
     val level: CourseLevel,
+    val category: CourseCategory,
 ) {
-
     init {
-        require(id > 0) {
-            "ID DEVE SER POSITIVO"
-        }
-        require(title.isNotBlank()) {
-            "CURSO DEVE HAVER UM TÍTULO VÁLIDO"
-        }
-        require(workloadHours > 0) {
-            "A CARGA HORÁRIA DEVE SER MAIOR QUE 0"
-        }
+        require(id > 0) { "ID deve ser positivo" }
+        require(title.isNotBlank()) { "Curso deve haver um título válido" }
+        require(workloadHours > 0) { "A carga horária deve ser maior que 0" }
     }
 
     fun summary(): String {
-        return "O curso de $title com id $id tem $workloadHours horas de carga horária, com um nível $level"
+        return "Curso: $title | ID: $id | Carga: ${workloadHours}h | Nível: $level | Categoria: $category"
     }
-
 }

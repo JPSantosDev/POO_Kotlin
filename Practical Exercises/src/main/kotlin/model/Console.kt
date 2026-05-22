@@ -1,5 +1,6 @@
 package org.example.model
 
+import org.example.enums.CourseCategory
 import org.example.enums.CourseLevel
 import org.example.enums.TrailStatus
 import org.example.services.CourseService
@@ -35,8 +36,6 @@ class Console(
         }
     }
 
-    // ─── Menu ────────────────────────────────────────────────────────────────
-
     private fun printMenu() {
         println("\n=== Sistema de Alunos e Trilhas ===")
         println("1  - Cadastrar aluno")
@@ -52,7 +51,6 @@ class Console(
         println("11 - Sair")
         print("Opção: ")
     }
-
 
     private fun cadastrarAluno() {
         print("ID: ")
@@ -87,10 +85,13 @@ class Console(
     private fun cadastrarCurso() {
         print("ID: ")
         val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+
         print("Título: ")
         val titulo = readlnOrNull()?.trim() ?: return
+
         print("Carga horária (horas): ")
         val carga = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("Carga horária inválida."); return }
+
         println("Nível (BASIC, INTERMEDIATE, ADVANCED): ")
         val nivelStr = readlnOrNull()?.trim()?.uppercase() ?: return
         val nivel = try {
@@ -100,8 +101,17 @@ class Console(
             return
         }
 
+        println("Categoria (KOTLIN, ANDROID, ARCHITECTURE, TESTS, DESIGN): ")
+        val categoriaStr = readlnOrNull()?.trim()?.uppercase() ?: return
+        val categoria = try {
+            CourseCategory.valueOf(categoriaStr)
+        } catch (e: IllegalArgumentException) {
+            println("Categoria inválida.")
+            return
+        }
+
         try {
-            if (courseService.addCourse(Course(id, titulo, carga, nivel)))
+            if (courseService.addCourse(Course(id, titulo, carga, nivel, categoria)))
                 println("Curso cadastrado com sucesso.")
             else
                 println("Erro: ID já cadastrado.")
@@ -118,17 +128,20 @@ class Console(
         }
         println("\n--- Cursos ---")
         cursos.forEach {
-            println("ID: ${it.id} | Título: ${it.title} | Carga: ${it.workloadHours}h | Nível: ${it.level}")
+            println("ID: ${it.id} | Título: ${it.title} | Carga: ${it.workloadHours}h | Nível: ${it.level} | Categoria: ${it.category}")
         }
     }
 
     private fun cadastrarTrilha() {
         print("ID: ")
         val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+
         print("Nome: ")
         val nome = readlnOrNull()?.trim() ?: return
+
         print("Descrição: ")
         val descricao = readlnOrNull()?.trim() ?: return
+
         println("Status (PLANNED, ACTIVE, COMPLETED, ARCHIVED): ")
         val statusStr = readlnOrNull()?.trim()?.uppercase() ?: return
         val status = try {
@@ -166,7 +179,7 @@ class Console(
         print("ID do curso: ")
         val courseId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
-        val trilha = trailService.findTrail(trailId) ?: run { println("Trilha não encontrada."); return }
+        trailService.findTrail(trailId) ?: run { println("Trilha não encontrada."); return }
         val curso = courseService.searchCourse(courseId) ?: run { println("Curso não encontrado."); return }
 
         if (trailService.addCourseToTrail(trailId, curso))
@@ -249,7 +262,9 @@ class Console(
             if (matriculas.isEmpty())
                 println("  Nenhum aluno matriculado nesta trilha.")
             else
-                matriculas.forEach { println("  - ${it.student.name} | Progresso: ${it.percent()}% | Status: ${it.status}") }
+                matriculas.forEach {
+                    println("  - ${it.student.name} | Progresso: ${it.percent()}% | Status: ${it.status}")
+                }
         }
     }
 
