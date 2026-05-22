@@ -36,50 +36,7 @@ O sistema simula um ambiente educacional onde estudantes podem ser cadastrados e
 
 ---
 
-# 3. Como Executar
-
-## Pré-requisitos
-
-* Java JDK 17+
-* Kotlin
-* Gradle
-* IntelliJ IDEA (recomendado)
-
----
-
-## Clonar o projeto
-
-```bash
-git clone https://github.com/JPSantosDev/POO_Kotlin.git
-```
-
----
-
-## Entrar na pasta
-
-```bash
-cd "Practical Exercises"
-```
-
----
-
-## Executar
-
-Linux/Mac:
-
-```bash
-./gradlew run
-```
-
-Windows:
-
-```bash
-gradlew.bat run
-```
-
----
-
-# 4. Estrutura do Projeto
+# 3. Estrutura do Projeto
 
 ```text
 src/main/kotlin/
@@ -109,7 +66,7 @@ src/main/kotlin/
 
 ---
 
-# 5. Principais Classes
+# 4. Principais Classes
 
 ## 📘 Course
 
@@ -244,7 +201,7 @@ Responsável por:
 
 ---
 
-# 6. Regras Implementadas
+# 5. Regras Implementadas
 
 ## Cursos
 
@@ -277,7 +234,7 @@ Responsável por:
 
 ---
 
-# 7. Decisões de Modelagem
+# 6. Decisões de Modelagem
 
 ## Uso de Pacotes
 
@@ -323,7 +280,7 @@ Isso evita objetos inválidos.
 
 ---
 
-# 8. Checklist Resumido de Validação
+# 7. Checklist Resumido de Validação
 
 | Funcionalidade                  | Status     |
 | ------------------------------- | ---------- |
@@ -340,7 +297,7 @@ Isso evita objetos inválidos.
 
 
 
-# 9. Checklist de Testes
+# 8. Checklist de Testes
 
 ## Testes Manuais
 
@@ -357,7 +314,7 @@ Isso evita objetos inválidos.
 
 ---
 
-# 10. Evidências de Execução
+# 9. Evidências de Execução
 
 ## Exemplo de execução
 
@@ -390,7 +347,7 @@ Isso evita objetos inválidos.
 
 ---
 
-# 11. Relatório Curto de Entrega
+# 10. Relatório Curto de Entrega
 
 ## Implementado
 
@@ -429,7 +386,7 @@ Isso evita objetos inválidos.
 
 ---
 
-# 12. Evidência do Checklist Atualizado Diariamente
+# 11. Evidência do Checklist Atualizado Diariamente
 
 ## Itens necessários
 
