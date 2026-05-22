@@ -12,26 +12,15 @@ class CourseService() {
         return true
     }
 
-    fun searchCourse(id:Int): Course? {
-        return courses.find { it.id == id }
-    }
+    fun searchCourse(id: Int): Course? = courses.find { it.id == id }
 
-    fun orderCourse(): List<Course> {
-        return courses.sortedBy { it.title }
-    }
+    fun listAll(): List<Course> = courses.toList()
 
-    fun levelCourse(level: CourseLevel): List<Course> {
-        return courses.filter { it.level == level }
-    }
+    fun orderCourse(): List<Course> = courses.sortedBy { it.title }
 
-    fun totalWorkload(): Int {
-        return courses.sumOf { it.workloadHours }
-    }
+    fun levelCourse(level: CourseLevel): List<Course> = courses.filter { it.level == level }
 
-    fun removeCourse(id: Int): Boolean {
-        return courses.removeIf{ it.id == id }
-    }
-    fun listAll(): List<Course> {
-        return courses.toList()
-    }
+    fun totalWorkload(): Int = courses.sumOf { it.workloadHours }
+
+    fun removeCourse(id: Int): Boolean = courses.removeIf { it.id == id }
 }
