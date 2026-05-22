@@ -7,19 +7,25 @@ import org.example.services.CourseService
 import org.example.services.EnrollmentService
 import org.example.services.StudentService
 import org.example.services.TrailService
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 class Console(
-    val courseService: CourseService = CourseService(),
-    val enrollmentService: EnrollmentService = EnrollmentService(),
-    val studentService: StudentService = StudentService(),
-    val trailService: TrailService = TrailService()
+
+    private val courseService: CourseService = CourseService(),
+    private val enrollmentService: EnrollmentService = EnrollmentService(),
+    private val studentService: StudentService = StudentService(),
+    private val trailService: TrailService = TrailService()
 ) {
+    private val reader = BufferedReader(InputStreamReader(System.`in`, Charsets.UTF_8))
+
+    private fun readInput(): String? = reader.readLine()?.trim()
 
     fun run() {
         var running = true
         while (running) {
             printMenu()
-            when (readLine()?.trim()) {
+            when (readInput()) {
                 "1"  -> cadastrarAluno()
                 "2"  -> listarAlunos()
                 "3"  -> cadastrarCurso()
@@ -54,11 +60,19 @@ class Console(
 
     private fun cadastrarAluno() {
         print("ID: ")
-        val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val id = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
+
         print("Nome: ")
-        val nome = readlnOrNull()?.trim() ?: return
+        val nome = readInput() ?: return
+        var reg = Regex("^[\\p{L}]+$")
+
+        if(!nome.matches(reg)) {
+            println("Nome deve conter somente caracteres")
+            return
+        }
+
         print("E-mail: ")
-        val email = readlnOrNull()?.trim() ?: return
+        val email = readInput() ?: return
 
         try {
             if (studentService.createStudent(id, nome, email))
@@ -72,10 +86,7 @@ class Console(
 
     private fun listarAlunos() {
         val alunos = studentService.listStudents()
-        if (alunos.isEmpty()) {
-            println("Nenhum aluno cadastrado.")
-            return
-        }
+        if (alunos.isEmpty()) { println("Nenhum aluno cadastrado."); return }
         println("\n--- Alunos ---")
         alunos.forEach {
             println("ID: ${it.id} | Nome: ${it.name} | E-mail: ${it.email} | Status: ${it.status}")
@@ -84,30 +95,34 @@ class Console(
 
     private fun cadastrarCurso() {
         print("ID: ")
-        val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val id = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
         print("Título: ")
-        val titulo = readlnOrNull()?.trim() ?: return
+        val titulo = readInput() ?: return
+        var reg = Regex("^[\\p{L}]+$")
 
-        print("Carga horária (horas): ")
-        val carga = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("Carga horária inválida."); return }
-
-        println("Nível (BASIC, INTERMEDIATE, ADVANCED): ")
-        val nivelStr = readlnOrNull()?.trim()?.uppercase() ?: return
-        val nivel = try {
-            CourseLevel.valueOf(nivelStr)
-        } catch (e: IllegalArgumentException) {
-            println("Nível inválido.")
+        if(!titulo.matches(reg)) {
+            println("Título deve conter somente caracteres")
             return
         }
 
+        print("Carga horária (horas): ")
+        val carga = readInput()?.toIntOrNull() ?: run { println("Carga horária inválida."); return }
+
+        println("Nível (BASIC, INTERMEDIATE, ADVANCED): ")
+        val nivelStr = readInput()?.uppercase() ?: return
+        val nivel = try {
+            CourseLevel.valueOf(nivelStr)
+        } catch (e: IllegalArgumentException) {
+            println("Nível inválido."); return
+        }
+
         println("Categoria (KOTLIN, ANDROID, ARCHITECTURE, TESTS, DESIGN): ")
-        val categoriaStr = readlnOrNull()?.trim()?.uppercase() ?: return
+        val categoriaStr = readInput()?.uppercase() ?: return
         val categoria = try {
             CourseCategory.valueOf(categoriaStr)
         } catch (e: IllegalArgumentException) {
-            println("Categoria inválida.")
-            return
+            println("Categoria inválida."); return
         }
 
         try {
@@ -122,10 +137,8 @@ class Console(
 
     private fun listarCursos() {
         val cursos = courseService.listAll()
-        if (cursos.isEmpty()) {
-            println("Nenhum curso cadastrado.")
-            return
-        }
+
+        if (cursos.isEmpty()) { println("Nenhum curso cadastrado."); return }
         println("\n--- Cursos ---")
         cursos.forEach {
             println("ID: ${it.id} | Título: ${it.title} | Carga: ${it.workloadHours}h | Nível: ${it.level} | Categoria: ${it.category}")
@@ -134,21 +147,31 @@ class Console(
 
     private fun cadastrarTrilha() {
         print("ID: ")
-        val id = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val id = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
         print("Nome: ")
-        val nome = readlnOrNull()?.trim() ?: return
+        var reg = Regex("^[\\p{L}]+$")
+        val nome = readInput() ?: return
+
+        if(!nome.matches(reg)) {
+            println("Nome deve conter somente caracteres")
+            return
+        }
 
         print("Descrição: ")
-        val descricao = readlnOrNull()?.trim() ?: return
+        val descricao = readInput() ?: return
+
+        if(!nome.matches(reg)){
+            println("Descrição deve conter somente caracteres")
+            return
+        }
 
         println("Status (PLANNED, ACTIVE, COMPLETED, ARCHIVED): ")
-        val statusStr = readlnOrNull()?.trim()?.uppercase() ?: return
+        val statusStr = readInput()?.uppercase() ?: return
         val status = try {
             TrailStatus.valueOf(statusStr)
         } catch (e: IllegalArgumentException) {
-            println("Status inválido.")
-            return
+            println("Status inválido."); return
         }
 
         try {
@@ -163,10 +186,7 @@ class Console(
 
     private fun listarTrilhas() {
         val trilhas = trailService.listTrails()
-        if (trilhas.isEmpty()) {
-            println("Nenhuma trilha cadastrada.")
-            return
-        }
+        if (trilhas.isEmpty()) { println("Nenhuma trilha cadastrada."); return }
         println("\n--- Trilhas ---")
         trilhas.forEach {
             println("ID: ${it.id} | Nome: ${it.name} | Status: ${it.status} | Cursos: ${it.courseCount()} | Carga total: ${it.totalTrailWorkload()}h")
@@ -175,9 +195,9 @@ class Console(
 
     private fun adicionarCursoATrilha() {
         print("ID da trilha: ")
-        val trailId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val trailId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
         print("ID do curso: ")
-        val courseId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val courseId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
         trailService.findTrail(trailId) ?: run { println("Trilha não encontrada."); return }
         val curso = courseService.searchCourse(courseId) ?: run { println("Curso não encontrado."); return }
@@ -185,14 +205,14 @@ class Console(
         if (trailService.addCourseToTrail(trailId, curso))
             println("Curso adicionado à trilha com sucesso.")
         else
-            println("Curso já associado a esta trilha.")
+            println("Curso já associado a esta trilha ou trilha não permite alteração.")
     }
 
     private fun matricularAluno() {
         print("ID do aluno: ")
-        val studentId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val studentId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
         print("ID da trilha: ")
-        val trailId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val trailId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
         val aluno = studentService.findById(studentId) ?: run { println("Aluno não encontrado."); return }
         val trilha = trailService.findTrail(trailId) ?: run { println("Trilha não encontrada."); return }
@@ -205,9 +225,9 @@ class Console(
 
     private fun registrarProgresso() {
         print("ID do aluno: ")
-        val studentId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val studentId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
         print("ID da trilha: ")
-        val trailId = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("ID inválido."); return }
+        val trailId = readInput()?.toIntOrNull() ?: run { println("ID inválido."); return }
 
         val matricula = enrollmentService.findEnrollment(studentId, trailId)
             ?: run { println("Matrícula ativa não encontrada."); return }
@@ -218,7 +238,7 @@ class Console(
         }
 
         print("Cursos concluídos (total da trilha: ${matricula.trail.courseCount()}): ")
-        val concluidos = readlnOrNull()?.trim()?.toIntOrNull() ?: run { println("Valor inválido."); return }
+        val concluidos = readInput()?.toIntOrNull() ?: run { println("Valor inválido."); return }
 
         if (matricula.registerProgress(concluidos))
             println("Progresso registrado com sucesso.")
@@ -239,7 +259,7 @@ class Console(
             println("7 - Voltar ao menu principal")
             print("Opção: ")
 
-            when (readLine()?.trim()) {
+            when (readInput()) {
                 "1" -> listarAlunos()
                 "2" -> listarCursos()
                 "3" -> listarTrilhas()
@@ -279,10 +299,7 @@ class Console(
 
     private fun relatorioSemMatricula() {
         val semMatricula = enrollmentService.studentsWithoutEnrollments(studentService.listStudents())
-        if (semMatricula.isEmpty()) {
-            println("Todos os alunos possuem matrícula.")
-            return
-        }
+        if (semMatricula.isEmpty()) { println("Todos os alunos possuem matrícula."); return }
         println("\n--- Alunos sem Matrícula ---")
         semMatricula.forEach { println("ID: ${it.id} | Nome: ${it.name}") }
     }
